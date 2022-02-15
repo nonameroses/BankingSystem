@@ -6,22 +6,22 @@ import java.util.List;
 public class Transaction {
     private String accountNo;
     private Date date;
-    private double amount;
+    private BigDecimal amount;
     private TypeOfTransaction type;
 
 
 
-    public Transaction(String accountNo, double amount, TypeOfTransaction type) {
+    public Transaction(String accountNo, BigDecimal amount, TypeOfTransaction type) {
         this.amount = amount;
         this.type = type;
         this.accountNo = accountNo;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

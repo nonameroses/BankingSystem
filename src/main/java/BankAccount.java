@@ -1,36 +1,53 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 
 public class BankAccount extends Account{
     private Transaction transaction;
 
 
-    public BankAccount(String accountNo, String name, double balance) {
-            super(accountNo,name,balance);
+    public BankAccount(String accountNo, String name) {
+            super(accountNo,name);
     }
 
 
     @Override
-    public void withdraw(double amount) {
-        if(this.balance - amount > 0){
-            this.balance = this.balance - amount;
-            transaction = new Transaction(super.getAccountNo(),amount, TypeOfTransaction.WITHDRAW);
-            super.transactions.add(transaction);
-
-        }else if (amount > balance){
-            System.out.println("Insufficient Funds!");
+    public boolean withdraw(BigDecimal amount) {
+        if(amount.compareTo(BigDecimal.valueOf(0)) < 0){
+            System.out.println("Cannot withdraw a negative number!");
+            return false;
         }
+        if(amount.compareTo(balance) > 0){
+            System.out.println("Insufficient Funds!");
+            return false;
+        }
+
+        this.balance = super.balance.subtract(amount);
+        transaction = new Transaction(super.getAccountNo(),amount, TypeOfTransaction.WITHDRAW);
+        super.transactions.add(transaction);
+        return true;
+
+
     }
 
     @Override
-    public void deposit(double amount) {
-        this.balance =+ amount;
+    public boolean deposit(BigDecimal amount) {
+        if(amount.compareTo(BigDecimal.valueOf(0)) < 0){
+            System.out.println("Cannot deposit a negative number!");
+            return false;
+        }
+        if(amount.compareTo(balance) > 0){
+            System.out.println("Insufficient Funds!");
+            return false;
+        }
+
+
+
+        this.balance = super.balance.add(amount);
+        transaction = new Transaction(super.getAccountNo(),amount, TypeOfTransaction.DEPOSIT);
+        super.transactions.add(transaction);
+        return true;
     }
 
-    @Override
-    public void transaction() {
 
-    }
 
 
     public void transfer() {

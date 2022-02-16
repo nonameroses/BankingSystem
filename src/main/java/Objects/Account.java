@@ -1,14 +1,14 @@
-import javax.money.CurrencyUnit;
-import javax.money.Monetary;
+package Objects;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public abstract class Account {
     private String accountNo;
     private String name;
     protected List<Transaction> transactions;
+    protected Transaction transaction;
     protected BigDecimal balance;
 
 
@@ -27,6 +27,7 @@ public abstract class Account {
 
     public abstract boolean withdraw(BigDecimal amount);
     public abstract boolean deposit(BigDecimal amount);
+    public abstract boolean transferTo(Account accountTo, BigDecimal amount);
 
     public void printTransactions(){
         for(Transaction transaction : transactions){
@@ -69,7 +70,7 @@ public abstract class Account {
 
     @Override
     public String toString() {
-        return "Account Number: " + accountNo +
+        return "Objects.Account Number: " + accountNo +
                 " || Name: " + this.name + " || Balance: "+
                 this.balance + "\n";
     }

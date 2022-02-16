@@ -1,3 +1,5 @@
+package Objects;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,6 +10,7 @@ public class Transaction {
     private Date date;
     private BigDecimal amount;
     private TypeOfTransaction type;
+    private final List<Transaction> transactions = new ArrayList<>();
 
 
 
@@ -26,10 +29,10 @@ public class Transaction {
     }
 
     public void add(Transaction transaction){
-        List<Transaction> transactions = new ArrayList<>();
         transactions.add(transaction);
 
-
+    }
+    public void sort(){
 
     }
 
@@ -52,11 +55,13 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
+        return "Objects.Transaction{" +
                 "account=" + accountNo +
                 ", date=" + date +
                 ", amount=" + amount +
                 ", type=" + type +
                 '}';
     }
+
+
 }
